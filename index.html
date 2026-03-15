@@ -3,49 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Ejecutador de Código</title>
+    <title>¿Quieres salir conmigo? ❤️</title>
     <style>
-        body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        header { background: #333; color: white; padding: 10px; text-align: center; }
-        .container { display: flex; flex: 1; border-top: 2px solid #555; }
-        textarea { width: 50%; padding: 15px; border: none; border-right: 2px solid #555; font-family: monospace; font-size: 16px; background: #1e1e1e; color: #d4d4d4; resize: none; }
-        iframe { width: 50%; border: none; background: white; }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+        }
+
+        #meme-img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        #btn-si {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #btn-no {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>🚀 Mi Visualizador de Código</h1>
-</header>
+    <div class="container" id="main-card">
+        <img id="meme-img" src="https://media.tenor.com/ICV9YshfS_AAAAAi/cat-puss-in-boots.gif" alt="Meme triste">
+        <h1 id="pregunta">¿Quieres salir conmigo? ❤️</h1>
+        
+        <div class="buttons">
+            <button id="btn-si">Sí</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
 
-<div class="container">
-    <textarea id="codigo" placeholder="Escribe tu HTML aquí..."></textarea>
-    
-    <iframe id="resultado"></iframe>
-</div>
+    <div class="container hidden" id="success-message">
+        <img src="https://media.tenor.com/u_pW-zB0yCAAAAAi/cat-love.gif" alt="Meme feliz" style="width: 300px; border-radius: 15px;">
+        <h1 style="color: #d63384;">¡Sabía que dirías que sí! ❤️</h1>
+        <p style="font-size: 1.5rem; color: #555;">¡Va a ser la mejor cita del mundo! 😍</p>
+    </div>
 
-<script>
-    const areaCodigo = document.getElementById('codigo');
-    const visualizador = document.getElementById('resultado');
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const memeImg = document.getElementById('meme-img');
+        const mainCard = document.getElementById('main-card');
+        const successMessage = document.getElementById('success-message');
 
-    // Función que actualiza el iframe cada vez que escribes
-    areaCodigo.addEventListener('input', () => {
-        const contenido = areaCodigo.value;
-        const documento = visualizador.contentDocument || visualizador.contentWindow.document;
-        documento.open();
-        documento.write(contenido);
-        documento.close();
-    });
+        let siFontSize = 1.2; 
+        let noClickCount = 0;
 
-    // Código inicial de ejemplo
-    areaCodigo.value = `<h1>¡Hola Mundo!</h1>
-<p>Cambia este texto y mira lo que pasa a la derecha.</p>
-<style>
-  h1 { color: darkblue; }
-  body { background: #f0f0f0; text-align: center; padding-top: 50px; }
-</style>`;
-    areaCodigo.dispatchEvent(new Event('input'));
-</script>
+        // Frases actualizadas para la invitación a salir
+        const frasesNo = [
+            "¿Segura? ",
+            "Piénsalo un poquito más...",
+            "Te llevaré por un helado 🍦",
+            "¡Prometo que no habrá silencios incómodos!",
+            "¿Y si te digo que yo invito?",
+            "Ándale, di que sí... 🥺",
+            "Mi corazón se rompe 💔",
+            "¡Solo un ratito!",
+            "¡Ya dale al botón verde!"
+        ];
 
+        const memesTristes = [
+            "https://media.tenor.com/Y5V97G6O7m0AAAAi/sad-cat.gif",
+            "https://media.tenor.com/0v8XoW9n3pIAAAAi/cat-sad.gif",
+            "https://media.tenor.com/zS_T6Yq6_m0AAAAi/crying-cat.gif"
+        ];
+
+        btnNo.addEventListener('click', () => {
+            // Aumentar tamaño del botón SÍ
+            siFontSize += 1.5; 
+            btnSi.style.fontSize = siFontSize + "rem";
+            btnSi.style.padding = (siFontSize * 10) + "px " + (siFontSize * 20) + "px";
+
+            // Cambiar texto del botón NO
+            if (noClickCount < frasesNo.length) {
+                btnNo.innerText = frasesNo[noClickCount];
+                memeImg.src = memesTristes[Math.floor(Math.random() * memesTristes.length)];
+            } else {
+                btnNo.innerText = "Ya no puedes decir que no 😎";
+                btnNo.style.display = "none"; 
+            }
+
+            noClickCount++;
+        });
+
+        btnSi.addEventListener('click', () => {
+            mainCard.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
