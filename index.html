@@ -2,94 +2,75 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Ejecutador de Código PRO</title>
+    <title>Súper Ejecutador Multi-Lenguaje</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: #121212; color: white; }
-        header { background: #1f1f1f; padding: 15px; text-align: center; border-bottom: 1px solid #333; }
-        header h1 { margin: 0; font-size: 1.5rem; }
-        .container { display: flex; flex: 1; border-top: 1px solid #333; overflow: hidden; }
-        textarea { width: 50%; padding: 20px; border: none; border-right: 1px solid #333; font-family: 'Consolas', monospace; font-size: 14px; background: #1e1e1e; color: #d4d4d4; resize: none; outline: none; }
-        textarea::placeholder { color: #555; }
-        iframe { width: 50%; border: none; background: #fff; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: #121212; color: white; }
+        header { background: #1f1f1f; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .main { display: flex; flex: 1; overflow: hidden; }
+        textarea { width: 50%; padding: 20px; border: none; background: #1e1e1e; color: #61afef; font-family: 'Consolas', monospace; font-size: 14px; outline: none; resize: none; }
+        .output-container { width: 50%; background: #000; padding: 20px; overflow-y: auto; border-left: 1px solid #333; }
+        #output { color: #98c379; white-space: pre-wrap; font-family: 'Consolas', monospace; }
+        button { background: #e06c75; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; border-radius: 4px; }
+        button:hover { background: #d15a63; }
+        select { background: #333; color: white; border: 1px solid #555; padding: 5px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🚀 Mi Visualizador de Código</h1>
+    <div>
+        <strong>🚀 DevRunner Pro</strong>
+        <select id="lenguaje">
+            <option value="cpp">C++ (GCC 9.2.0)</option>
+            <option value="python3">Python 3</option>
+            <option value="java">Java</option>
+        </select>
+    </div>
+    <button onclick="ejecutarCodigo()">EJECUTAR CÓDIGO</button>
 </header>
 
-<div class="container">
-    <textarea id="codigo" placeholder="Pega tu código HTML/CSS/JS aquí..."></textarea>
-    
-    <iframe id="resultado"></iframe>
+<div class="main">
+    <textarea id="codigo">
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "¡Hola desde C++ en la web!" << endl;
+    int a = 10, b = 20;
+    cout << "La suma es: " << (a + b) << endl;
+    return 0;
+}</textarea>
+    <div class="output-container">
+        <div style="color: #555; margin-bottom: 10px;">> Resultado de consola:</div>
+        <div id="output">Haz clic en "Ejecutar" para ver el resultado...</div>
+    </div>
 </div>
 
 <script>
-    const areaCodigo = document.getElementById('codigo');
-    const visualizador = document.getElementById('resultado');
+    async function ejecutarCodigo() {
+        const output = document.getElementById('output');
+        const codigo = document.getElementById('codigo').value;
+        const lenguaje = document.getElementById('lenguaje').value;
 
-    // Esta función es la "magia" que soluciona el problema de las gráficas
-    areaCodigo.addEventListener('input', () => {
-        const contenido = areaCodigo.value;
-        
-        // Creamos un blob para que el navegador lo trate como un archivo real
-        const blob = new Blob([contenido], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        
-        // Asignamos la URL al iframe. Esto permite que las librerías carguen bien.
-        visualizador.src = url;
-    });
+        output.innerHTML = "Compilando y ejecutando...";
 
-    // Código inicial de ejemplo (puedes cambiarlo)
-    areaCodigo.value = `<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: sans-serif; background: #121212; color: white; padding: 20px; text-align: center; }
-        .chart-container { width: 80%; margin: 20px auto; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; }
-    </style>
-</head>
-<body>
-    <h1>¡Hola Mundo de las Gráficas!</h1>
-    <p>Este es tu nuevo ejecutador funcionando perfectamente.</p>
-    
-    <div class="chart-container">
-        <canvas id="miGrafica"></canvas>
-    </div>
+        try {
+            // Usamos la API pública de Piston (emulated)
+            const respuesta = await fetch('https://emkc.org/api/v2/piston/execute', {
+                method: 'POST',
+                body: JSON.stringify({
+                    language: lenguaje,
+                    version: "*",
+                    files: [{ content: codigo }]
+                })
+            });
 
-    <script>
-        // Lógica de la gráfica de ejemplo
-        const ctx = document.getElementById('miGrafica').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr'],
-                datasets: [{
-                    label: 'Ventas de Gasolina',
-                    data: [1200, 1900, 1500, 2100],
-                    backgroundColor: 'rgba(230, 57, 70, 0.6)',
-                    borderColor: 'rgba(230, 57, 70, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                plugins: { legend: { labels: { color: "white" } } },
-                scales: {
-                    y: { beginAtZero: true, ticks: { color: "white" } },
-                    x: { ticks: { color: "white" } }
-                }
-            }
-        });
-    </script>
-</body>
-</html>`;
-
-    // Para que la gráfica de ejemplo cargue al iniciar la página
-    areaCodigo.dispatchEvent(new Event('input'));
+            const data = await respuesta.json();
+            output.innerText = data.run.stdout || data.run.stderr || "El programa se ejecutó sin salida de texto.";
+        } catch (error) {
+            output.innerText = "Error de conexión: No se pudo contactar al servidor de compilación.";
+        }
+    }
 </script>
 
 </body>
