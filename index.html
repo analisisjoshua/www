@@ -1,74 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <style>
-    /* Estilos para que se vea moderno */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    button {
-      background: #ff4757;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      background: #ff6b81;
-    }
-
-    #contador {
-      font-size: 3rem;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Ejecutador de Código</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        header { background: #333; color: white; padding: 10px; text-align: center; }
+        .container { display: flex; flex: 1; border-top: 2px solid #555; }
+        textarea { width: 50%; padding: 15px; border: none; border-right: 2px solid #555; font-family: monospace; font-size: 16px; background: #1e1e1e; color: #d4d4d4; resize: none; }
+        iframe { width: 50%; border: none; background: white; }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Contador Interactivo</h1>
-    <p>Haz clic para aumentar el número:</p>
-    <div id="contador">0</div>
-    <button onclick="aumentar()">¡Clic aquí!</button>
-  </div>
+<header>
+    <h1>🚀 Mi Visualizador de Código</h1>
+</header>
 
-  <script>
-    // Lógica sencilla en JavaScript
-    let cuenta = 0;
-    function aumentar() {
-      cuenta++;
-      document.getElementById('contador').innerText = cuenta;
-      
-      // Efecto sorpresa al llegar a 10
-      if(cuenta === 10) {
-        alert("¡Wow, 10 clics! Eres rápido.");
-      }
-    }
-  </script>
+<div class="container">
+    <textarea id="codigo" placeholder="Escribe tu HTML aquí..."></textarea>
+    
+    <iframe id="resultado"></iframe>
+</div>
+
+<script>
+    const areaCodigo = document.getElementById('codigo');
+    const visualizador = document.getElementById('resultado');
+
+    // Función que actualiza el iframe cada vez que escribes
+    areaCodigo.addEventListener('input', () => {
+        const contenido = areaCodigo.value;
+        const documento = visualizador.contentDocument || visualizador.contentWindow.document;
+        documento.open();
+        documento.write(contenido);
+        documento.close();
+    });
+
+    // Código inicial de ejemplo
+    areaCodigo.value = `<h1>¡Hola Mundo!</h1>
+<p>Cambia este texto y mira lo que pasa a la derecha.</p>
+<style>
+  h1 { color: darkblue; }
+  body { background: #f0f0f0; text-align: center; padding-top: 50px; }
+</style>`;
+    areaCodigo.dispatchEvent(new Event('input'));
+</script>
 
 </body>
 </html>
