@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Ejecutador de Código</title>
+    <title>Mi Ejecutador de Código PRO</title>
     <style>
-        body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        header { background: #333; color: white; padding: 10px; text-align: center; }
-        .container { display: flex; flex: 1; border-top: 2px solid #555; }
-        textarea { width: 50%; padding: 15px; border: none; border-right: 2px solid #555; font-family: monospace; font-size: 16px; background: #1e1e1e; color: #d4d4d4; resize: none; }
-        iframe { width: 50%; border: none; background: white; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: #121212; color: white; }
+        header { background: #1f1f1f; padding: 15px; text-align: center; border-bottom: 1px solid #333; }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        .container { display: flex; flex: 1; border-top: 1px solid #333; overflow: hidden; }
+        textarea { width: 50%; padding: 20px; border: none; border-right: 1px solid #333; font-family: 'Consolas', monospace; font-size: 14px; background: #1e1e1e; color: #d4d4d4; resize: none; outline: none; }
+        textarea::placeholder { color: #555; }
+        iframe { width: 50%; border: none; background: #fff; }
     </style>
 </head>
 <body>
@@ -19,7 +21,7 @@
 </header>
 
 <div class="container">
-    <textarea id="codigo" placeholder="Escribe tu HTML aquí..."></textarea>
+    <textarea id="codigo" placeholder="Pega tu código HTML/CSS/JS aquí..."></textarea>
     
     <iframe id="resultado"></iframe>
 </div>
@@ -28,22 +30,65 @@
     const areaCodigo = document.getElementById('codigo');
     const visualizador = document.getElementById('resultado');
 
-    // Función que actualiza el iframe cada vez que escribes
+    // Esta función es la "magia" que soluciona el problema de las gráficas
     areaCodigo.addEventListener('input', () => {
         const contenido = areaCodigo.value;
-        const documento = visualizador.contentDocument || visualizador.contentWindow.document;
-        documento.open();
-        documento.write(contenido);
-        documento.close();
+        
+        // Creamos un blob para que el navegador lo trate como un archivo real
+        const blob = new Blob([contenido], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        
+        // Asignamos la URL al iframe. Esto permite que las librerías carguen bien.
+        visualizador.src = url;
     });
 
-    // Código inicial de ejemplo
-    areaCodigo.value = `<h1>¡Hola Mundo!</h1>
-<p>Cambia este texto y mira lo que pasa a la derecha.</p>
-<style>
-  h1 { color: darkblue; }
-  body { background: #f0f0f0; text-align: center; padding-top: 50px; }
-</style>`;
+    // Código inicial de ejemplo (puedes cambiarlo)
+    areaCodigo.value = `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: white; padding: 20px; text-align: center; }
+        .chart-container { width: 80%; margin: 20px auto; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>¡Hola Mundo de las Gráficas!</h1>
+    <p>Este es tu nuevo ejecutador funcionando perfectamente.</p>
+    
+    <div class="chart-container">
+        <canvas id="miGrafica"></canvas>
+    </div>
+
+    <script>
+        // Lógica de la gráfica de ejemplo
+        const ctx = document.getElementById('miGrafica').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Ventas de Gasolina',
+                    data: [1200, 1900, 1500, 2100],
+                    backgroundColor: 'rgba(230, 57, 70, 0.6)',
+                    borderColor: 'rgba(230, 57, 70, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: { legend: { labels: { color: "white" } } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: "white" } },
+                    x: { ticks: { color: "white" } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>`;
+
+    // Para que la gráfica de ejemplo cargue al iniciar la página
     areaCodigo.dispatchEvent(new Event('input'));
 </script>
 
