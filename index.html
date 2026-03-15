@@ -1,77 +1,74 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Súper Ejecutador Multi-Lenguaje</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: #121212; color: white; }
-        header { background: #1f1f1f; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
-        .main { display: flex; flex: 1; overflow: hidden; }
-        textarea { width: 50%; padding: 20px; border: none; background: #1e1e1e; color: #61afef; font-family: 'Consolas', monospace; font-size: 14px; outline: none; resize: none; }
-        .output-container { width: 50%; background: #000; padding: 20px; overflow-y: auto; border-left: 1px solid #333; }
-        #output { color: #98c379; white-space: pre-wrap; font-family: 'Consolas', monospace; }
-        button { background: #e06c75; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; border-radius: 4px; }
-        button:hover { background: #d15a63; }
-        select { background: #333; color: white; border: 1px solid #555; padding: 5px; border-radius: 4px; }
-    </style>
+  <style>
+    /* Estilos para que se vea moderno */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    button {
+      background: #ff4757;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: #ff6b81;
+    }
+
+    #contador {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <div>
-        <strong>🚀 DevRunner Pro</strong>
-        <select id="lenguaje">
-            <option value="cpp">C++ (GCC 9.2.0)</option>
-            <option value="python3">Python 3</option>
-            <option value="java">Java</option>
-        </select>
-    </div>
-    <button onclick="ejecutarCodigo()">EJECUTAR CÓDIGO</button>
-</header>
+  <div class="card">
+    <h1>Contador Interactivo</h1>
+    <p>Haz clic para aumentar el número:</p>
+    <div id="contador">0</div>
+    <button onclick="aumentar()">¡Clic aquí!</button>
+  </div>
 
-<div class="main">
-    <textarea id="codigo">
-#include <iostream>
-using namespace std;
-
-int main() {
-    cout << "¡Hola desde C++ en la web!" << endl;
-    int a = 10, b = 20;
-    cout << "La suma es: " << (a + b) << endl;
-    return 0;
-}</textarea>
-    <div class="output-container">
-        <div style="color: #555; margin-bottom: 10px;">> Resultado de consola:</div>
-        <div id="output">Haz clic en "Ejecutar" para ver el resultado...</div>
-    </div>
-</div>
-
-<script>
-    async function ejecutarCodigo() {
-        const output = document.getElementById('output');
-        const codigo = document.getElementById('codigo').value;
-        const lenguaje = document.getElementById('lenguaje').value;
-
-        output.innerHTML = "Compilando y ejecutando...";
-
-        try {
-            // Usamos la API pública de Piston (emulated)
-            const respuesta = await fetch('https://emkc.org/api/v2/piston/execute', {
-                method: 'POST',
-                body: JSON.stringify({
-                    language: lenguaje,
-                    version: "*",
-                    files: [{ content: codigo }]
-                })
-            });
-
-            const data = await respuesta.json();
-            output.innerText = data.run.stdout || data.run.stderr || "El programa se ejecutó sin salida de texto.";
-        } catch (error) {
-            output.innerText = "Error de conexión: No se pudo contactar al servidor de compilación.";
-        }
+  <script>
+    // Lógica sencilla en JavaScript
+    let cuenta = 0;
+    function aumentar() {
+      cuenta++;
+      document.getElementById('contador').innerText = cuenta;
+      
+      // Efecto sorpresa al llegar a 10
+      if(cuenta === 10) {
+        alert("¡Wow, 10 clics! Eres rápido.");
+      }
     }
-</script>
+  </script>
 
 </body>
 </html>
