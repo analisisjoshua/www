@@ -1,545 +1,459 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Carta de Amor Eterna ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+<title>Análisis de Ventas - Estación</title>
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(90deg, #f5b9d0 0%, #f8d8e0 25%, #fffaf0 50%, #f8d8e0 75%, #f5b9d0 100%);
-            font-family: 'Cormorant Garamond', serif;
-            padding: 0;
-            margin: 0;
-        }
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-        /* --- CONTENEDOR PRINCIPAL (CARTA) --- */
-        .carta {
-            width: 100%;
-            height: 100%;
-            max-width: 500px;
-            background: linear-gradient(180deg, #fffaf0 0%, #fff5f8 50%, #fffaf0 100%);
-            border: none;
-            border-radius: 0;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            overflow-x: hidden;
-            animation: aparicionCarta 1s ease-out;
-            position: relative;
-        }
+<style>
 
-        @keyframes aparicionCarta {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-        /* --- DECORACIÓN LATERAL --- */
-        .decoracion-lateral-izq,
-        .decoracion-lateral-der {
-            display: none;
-        }
+body{
+font-family:"Segoe UI", Arial, sans-serif;
+background:#0c0c0c;
+color:white;
+line-height:1.7;
+}
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        .contenido {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 18px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            gap: 12px;
-        }
+header{
+background:linear-gradient(135deg,#b30000,#7a0000);
+padding:35px 20px;
+text-align:center;
+font-size:clamp(24px,4vw,34px);
+font-weight:700;
+letter-spacing:1px;
+box-shadow:0 6px 18px rgba(0,0,0,0.5);
+}
 
-        /* --- TEXTO SUPERIOR --- */
-        .texto-superior {
-            color: #d81b60;
-            font-size: 1.4rem;
-            font-style: italic;
-            font-weight: 700;
-            line-height: 1.3;
-            letter-spacing: 0.3px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-            animation: aparicionTexto 0.8s ease-out 0.2s both;
-            margin-top: 10px;
-        }
+.container{
+width:92%;
+max-width:1200px;
+margin:auto;
+padding:30px 0;
+}
 
-        @keyframes aparicionTexto {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.pdfButton{
+background:#ff3b3b;
+color:white;
+padding:16px 36px;
+border:none;
+border-radius:8px;
+font-size:15px;
+cursor:pointer;
+margin:0 auto 35px auto;
+font-weight:600;
+transition:all .25s;
+display:block;
+box-shadow:0 6px 18px rgba(255,0,0,0.35);
+}
 
-        /* --- FOTO DE LA NOVIA - OPTIMIZADA PARA MOBILE --- */
-        .foto-novia-contenedor {
-            position: relative;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 3 / 2;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            animation: aparicionFoto 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
-            margin: 12px 0;
-        }
+.pdfButton:hover{
+background:#b30000;
+transform:translateY(-2px);
+box-shadow:0 10px 22px rgba(255,0,0,0.4);
+}
 
-        .foto-novia {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-        }
+.section{
+background:#141414;
+padding:35px;
+margin-bottom:35px;
+border-radius:12px;
+border-left:6px solid #ff3b3b;
+box-shadow:0 6px 20px rgba(0,0,0,0.6);
+transition:all .25s;
+}
 
-        @keyframes aparicionFoto {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+.section:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 28px rgba(0,0,0,0.8);
+}
 
-        /* --- NOMBRE DE SARA --- */
-        .nombre-sara {
-            color: #d81b60;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.4rem;
-            font-weight: 700;
-            animation: aparicionNombre 1s ease-out 0.3s both;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            letter-spacing: 2px;
-            margin: 8px 0;
-        }
+h2{
+color:#ff3b3b;
+margin-bottom:22px;
+font-size:clamp(20px,3vw,26px);
+border-bottom:2px solid #ff3b3b;
+padding-bottom:10px;
+}
 
-        @keyframes aparicionNombre {
-            from {
-                opacity: 0;
-                transform: scale(0.85);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+p{
+line-height:1.8;
+font-size:15px;
+margin-bottom:18px;
+color:#dcdcdc;
+}
 
-        /* --- ZONA CENTRAL DE CORAZONES --- */
-        .zona-corazones {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            height: 60px;
-            flex-shrink: 0;
-            margin: 8px 0;
-        }
+.highlight{
+color:#ff4d4d;
+font-weight:600;
+}
 
-        .corazon-flotante {
-            position: absolute;
-            font-size: 2.2rem;
-            animation: flotaCorazon 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-            filter: drop-shadow(0 4px 8px rgba(216, 27, 96, 0.25));
-        }
+.decorationImages{
+display:grid;
+grid-template-columns:1fr;
+gap:25px;
+margin:35px 0;
+padding:20px;
+background:#101010;
+border-radius:10px;
+border:1px solid #222;
+}
 
-        .corazon-1 {
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            animation: latidoPrincipal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-        }
+.decorationImages img{
+width:100%;
+border-radius:8px;
+opacity:.9;
+transition:.3s;
+}
 
-        .corazon-2 {
-            top: 25px;
-            left: 15%;
-            animation-delay: 0.1s;
-        }
+.decorationImages img:hover{
+transform:scale(1.03);
+opacity:1;
+}
 
-        .corazon-3 {
-            top: 25px;
-            right: 15%;
-            animation-delay: 0.2s;
-        }
+.grid{
+display:grid;
+grid-template-columns:1fr;
+gap:30px;
+margin-top:25px;
+}
 
-        @keyframes latidoPrincipal {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.2); }
-        }
+.chartBox{
+background:#1a1a1a;
+padding:25px;
+border-radius:12px;
+border:1px solid #262626;
+min-height:340px;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.5);
+}
 
-        @keyframes flotaCorazon {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.1); }
-        }
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:25px;
+font-size:14px;
+border-radius:10px;
+overflow:hidden;
+}
 
-        /* --- TEXTO DEL MENSAJE --- */
-        .texto-mensaje {
-            color: #ad1457;
-            font-size: 1rem;
-            font-style: italic;
-            line-height: 1.6;
-            text-align: justify;
-            animation: aparicionTexto 1s ease-out 0.4s both;
-            padding: 0 8px;
-            margin: 10px 0;
-        }
+th{
+background:#b30000;
+padding:15px;
+text-align:center;
+font-weight:600;
+}
 
-        .texto-mensaje strong {
-            color: #d81b60;
-            font-weight: bold;
-        }
+td{
+padding:14px;
+text-align:center;
+background:#1c1c1c;
+border-bottom:1px solid #2a2a2a;
+}
 
-        /* --- CONTADOR --- */
-        .texto-inferior {
-            color: #ad1457;
-            font-size: 0.95rem;
-            font-style: italic;
-            animation: aparicionTexto 1s ease-out 0.5s both;
-            margin-top: 10px;
-        }
+tr:hover td{
+background:#252525;
+}
 
-        #contador {
-            font-size: 1.3rem;
-            color: #d81b60;
-            font-weight: bold;
-            margin-top: 10px;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, rgba(216, 27, 96, 0.12) 0%, rgba(173, 20, 87, 0.06) 100%);
-            border-left: 6px solid #d81b60;
-            border-radius: 10px;
-            box-shadow: 
-                inset 0 1px 3px rgba(255, 255, 255, 0.6),
-                0 4px 12px rgba(216, 27, 96, 0.15);
-            animation: pulsoContador 2s ease-in-out infinite;
-            letter-spacing: 0.3px;
-        }
+footer{
+text-align:center;
+padding:22px;
+background:#0a0a0a;
+color:#8a8a8a;
+font-size:13px;
+margin-top:40px;
+border-top:2px solid #b30000;
+}
 
-        @keyframes pulsoContador {
-            0%, 100% {
-                box-shadow: 
-                    inset 0 1px 3px rgba(255, 255, 255, 0.6),
-                    0 4px 12px rgba(216, 27, 96, 0.15),
-                    0 0 0 0 rgba(216, 27, 96, 0.3);
-            }
-            50% {
-                box-shadow: 
-                    inset 0 1px 3px rgba(255, 255, 255, 0.6),
-                    0 4px 12px rgba(216, 27, 96, 0.15),
-                    0 0 0 12px rgba(216, 27, 96, 0);
-            }
-        }
+@media(min-width:768px){
 
-        #contador strong {
-            color: #880e4f;
-            font-weight: bold;
-        }
+.decorationImages{
+grid-template-columns:1fr 1fr;
+}
 
-        /* --- FIRMA --- */
-        .firma {
-            color: #d81b60;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.4rem;
-            font-weight: 700;
-            animation: aparicionFirma 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
-            flex-shrink: 0;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
+.grid{
+grid-template-columns:1fr 1fr;
+}
 
-        @keyframes aparicionFirma {
-            from {
-                opacity: 0;
-                transform: translateY(-10px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+.container{
+padding:40px 0;
+}
 
-        /* --- EFECTO CORAZONES CAYENDO --- */
-        .corazon-caida {
-            position: fixed;
-            pointer-events: none;
-            font-size: 2.5rem;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            animation: caida linear infinite;
-            z-index: 1;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-        }
+.section{
+padding:40px;
+}
 
-        @keyframes caida {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
+}
 
-        /* --- RESPONSIVE EXTRA OPTIMIZADO --- */
-        @media (max-width: 800px) {
-            body {
-                padding: 0;
-            }
+@media(max-width:480px){
 
-            .carta {
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
-                max-width: 100%;
-            }
+header{
+padding:25px 15px;
+}
 
-            .contenido {
-                padding: 20px 16px;
-                gap: 10px;
-            }
+.section{
+padding:20px;
+margin-bottom:20px;
+}
 
-            .texto-superior {
-                font-size: 1.35rem;
-                margin-top: 15px;
-            }
+p{
+font-size:14px;
+}
 
-            .nombre-sara {
-                font-size: 2.3rem;
-                margin: 10px 0;
-            }
+.chartBox{
+min-height:260px;
+}
 
-            .foto-novia-contenedor {
-                aspect-ratio: 3 / 2;
-                margin: 15px 0;
-                border-radius: 12px;
-            }
+table{
+font-size:12px;
+}
 
-            .texto-mensaje {
-                font-size: 1rem;
-                line-height: 1.6;
-                padding: 0 8px;
-            }
+th,td{
+padding:10px 6px;
+}
 
-            #contador {
-                font-size: 1.25rem;
-                padding: 14px 18px;
-                margin-top: 12px;
-            }
+}
 
-            .firma {
-                font-size: 1.3rem;
-                margin-top: 12px;
-                margin-bottom: 20px;
-            }
+@print{
 
-            .zona-corazones {
-                height: 55px;
-                margin: 10px 0;
-            }
+.pdfButton{display:none}
+.decorationImages{display:none}
 
-            .corazon-1 {
-                font-size: 2.8rem;
-            }
-        }
+body{
+background:white;
+color:black;
+}
 
-        @media (max-width: 480px) {
-            .contenido {
-                padding: 18px 14px;
-                gap: 8px;
-            }
+.section{
+background:white;
+border-left:5px solid black;
+box-shadow:none;
+page-break-inside:avoid;
+}
 
-            .texto-superior {
-                font-size: 1.25rem;
-                line-height: 1.25;
-                margin-top: 12px;
-                br {
-                    display: none;
-                }
-            }
+header{
+background:white;
+color:black;
+border-bottom:2px solid black;
+}
 
-            .nombre-sara {
-                font-size: 2.1rem;
-                margin: 8px 0;
-            }
+h2{
+color:black;
+border-bottom:2px solid black;
+}
 
-            .foto-novia-contenedor {
-                aspect-ratio: 3 / 2;
-                margin: 12px 0;
-                border-radius: 10px;
-            }
+table{
+color:black;
+}
 
-            .texto-mensaje {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                padding: 0 6px;
-                margin: 8px 0;
-            }
+th{
+background:#ccc;
+color:black;
+}
 
-            #contador {
-                font-size: 1.15rem;
-                padding: 12px 16px;
-                margin-top: 10px;
-            }
+td{
+background:white;
+border-bottom:1px solid #ddd;
+}
 
-            .firma {
-                font-size: 1.2rem;
-                margin-top: 10px;
-                margin-bottom: 18px;
-            }
+p{
+color:black;
+}
 
-            .zona-corazones {
-                height: 50px;
-                margin: 8px 0;
-            }
+.highlight{
+color:black;
+font-weight:bold;
+}
 
-            .corazon-1 {
-                font-size: 2.5rem;
-            }
+}
 
-            .corazon-2,
-            .corazon-3 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* --- EFECTO BRILLO SUTIL --- */
-        .brillo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 25%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
-            pointer-events: none;
-            animation: brilloSutil 5s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes brilloSutil {
-            0%, 100% {
-                opacity: 0.2;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-    </style>
+</style>
 </head>
+
 <body>
-    <div class="carta">
-        <div class="brillo"></div>
 
-        <!-- Contenido principal -->
-        <div class="contenido">
-            <!-- Texto superior -->
-            <div class="texto-superior">
-                Si pudiera elegir un lugar seguro, sería a tu lado. Cuanto más tiempo estoy contigo,<br><em>más te amo...</em>
-            </div>
+<header>
+Análisis de Ventas de Combustible
+</header>
 
-            <!-- FOTO DE SARA - OPTIMIZADA PARA MOBILE -->
-            <div class="foto-novia-contenedor">
-                <img src="https://i.ibb.co/fzJRP91x/ooo.jpg" alt="Sara" class="foto-novia" id="fotoNovia">
-            </div>
+<div class="container">
 
-            <!-- NOMBRE DE SARA -->
-            <div class="nombre-sara">Sara ✨</div>
+<button class="pdfButton" onclick="generarPDF()">Descargar como PDF</button>
 
-            <!-- Corazones flotantes -->
-            <div class="zona-corazones">
-                <div class="corazon-flotante corazon-1">❤️</div>
-                <div class="corazon-flotante corazon-2">💗</div>
-                <div class="corazon-flotante corazon-3">💗</div>
-            </div>
+<div id="contenidoPDF">
 
-            <!-- NUEVO TEXTO DEL MENSAJE -->
-            <div class="texto-mensaje">
-                <strong>Puedes escuchar mis palabras.</strong> Te extraño mucho y quiero pedirte perdón por todo. Sé que a veces me confundo y no siempre sé bien lo que quiero, pero eso no significa que no me importes.<br><br>
-                La verdad me dolió mucho saber que tu mamá te pegó y que te faltó al respeto. <strong>No me gusta que alguien te lastime, porque me importas demasiado,</strong> y por eso reaccioné así.<br><br>
-                Aun así, me gustaría que intentáramos hablar y ver cómo podemos solucionar las cosas entre nosotros.
-            </div>
+<div class="section">
 
-            <!-- Texto inferior con contador -->
-            <div class="texto-inferior">
-                Nuestros caminos se cruzaron hace...
-                <div id="contador">Cargando tiempo...</div>
-            </div>
+<h2>Reporte de Análisis</h2>
 
-            <!-- Firma -->
-            <div class="firma">Con todo mi amor 💕</div>
-        </div>
-    </div>
+<p>
+Durante los primeros 15 días del mes de marzo se realizó un análisis de ventas en la estación, obteniendo una venta total de <span class="highlight">3,196 litros</span>, así como la venta de <span class="highlight">17 periféricos</span>. 
+Al compararlo con el mes de febrero, donde se registró un promedio de <span class="highlight">3,370.79 litros</span> y <span class="highlight">18 periféricos</span>, se observa una disminución de <span class="highlight">174.79 litros</span>, lo que representa aproximadamente una baja del <span class="highlight">5.18 %</span> en la venta total. 
+En cuanto a periféricos, se registra <span class="highlight">1 unidad menos vendida</span>, equivalente a una disminución del <span class="highlight">5.56 %</span>.
+</p>
 
-    <script>
-        // --- FUNCIÓN DEL CONTADOR ---
-        // 14 de Febrero de 2026 = Inicio de la relación
-        const fechaInicio = new Date(2026, 1, 14, 10, 0, 0);
+<p>
+Cabe mencionar que esta variación en las ventas se encuentra directamente relacionada con los desabastos registrados en ambos meses. Durante el mes de febrero se presentó desabasto de gasolina premium, mientras que en marzo se ha presentado desabasto de diésel, el cual aún continúa. Esta situación ya fue reportada a los encargados del departamento correspondiente; sin embargo, se nos informó que debido al promedio de venta de la estación no es posible surtir diésel por el momento, ya que existe escasez de este combustible y se está dando prioridad a estaciones con mayor volumen de venta.
+</p>
 
-        function actualizarContador() {
-            const ahora = new Date();
-            const diferencia = ahora - fechaInicio;
+<p>
+En cuanto al desglose por producto, durante los 15 días analizados de marzo se vendieron <span class="highlight">2,484 litros de gasolina magna</span>, <span class="highlight">516 litros de premium</span> y <span class="highlight">487 litros de diésel</span>. Comparándolo con febrero, donde se registraron <span class="highlight">2,785.53 litros de magna</span>, <span class="highlight">167.66 litros de premium</span> y <span class="highlight">417.59 litros de diésel</span>, se observa que magna presentó una disminución de <span class="highlight">301.53 litros</span>, equivalente a una baja del <span class="highlight">10.82 %</span>.
+</p>
 
-            if (diferencia < 0) {
-                document.getElementById('contador').innerHTML = "¡Ese momento está por llegar! ❤️";
-                return;
-            }
+<p>
+Por otro lado, premium presentó un aumento de <span class="highlight">348.34 litros</span>, lo que representa un incremento aproximado del <span class="highlight">207.77 %</span>, reflejando la recuperación en ventas después del desabasto de este combustible que se presentó durante el mes de febrero.
+</p>
 
-            const msPerSeg = 1000;
-            const msPerMin = 60000;
-            const msPerHour = 3600000;
-            const msPerDay = 86400000;
+<p>
+En el caso del diésel, se registra un aumento de <span class="highlight">69.41 litros</span>, equivalente a un incremento aproximado del <span class="highlight">16.62 %</span>; esto a pesar de que actualmente continúa el desabasto de diésel durante el mes de marzo, lo cual ha limitado la venta normal de este combustible en la estación.
+</p>
 
-            const dias = Math.floor(diferencia / msPerDay);
-            const horas = Math.floor((diferencia % msPerDay) / msPerHour);
-            const minutos = Math.floor((diferencia % msPerHour) / msPerMin);
-            const segundos = Math.floor((diferencia % msPerMin) / msPerSeg);
+<p>
+En conclusión, la variación en los volúmenes de venta entre ambos meses se encuentra directamente influenciada por los problemas de abastecimiento de combustible, principalmente premium en febrero y diésel en marzo, situación que impacta directamente el comportamiento normal de ventas de la estación.
+</p>
 
-            document.getElementById('contador').innerHTML = 
-                `<strong>${dias}</strong> días, <strong>${horas}</strong> horas, <strong>${minutos}</strong> minutos y <strong>${segundos}</strong> segundos ❤️`;
-        }
+</div>
 
-        setInterval(actualizarContador, 1000);
-        actualizarContador();
+<div class="section">
 
-        // --- EFECTO DE CORAZONES CAYENDO ---
-        function crearCorazon() {
-            const corazon = document.createElement('div');
-            corazon.classList.add('corazon-caida');
+<h2>Tabla de Desglose de Combustible</h2>
 
-            const corazones = ['♥', '💕', '❤️', '💗', '💓'];
-            corazon.innerText = corazones[Math.floor(Math.random() * corazones.length)];
+<table>
 
-            corazon.style.left = Math.random() * 100 + 'vw';
-            corazon.style.color = `rgba(${Math.random() * 100 + 156}, 27, 96, ${Math.random() * 0.4 + 0.3})`;
-            corazon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+<tr>
+<th>Combustible</th>
+<th>Febrero</th>
+<th>Marzo</th>
+<th>Diferencia</th>
+</tr>
 
-            document.body.appendChild(corazon);
+<tr>
+<td>Magna</td>
+<td>2,785.53</td>
+<td>2,484</td>
+<td>-301.53</td>
+</tr>
 
-            setTimeout(() => { corazon.remove(); }, 10000);
-        }
+<tr>
+<td>Premium</td>
+<td>167.66</td>
+<td>516</td>
+<td>+348.34</td>
+</tr>
 
-        setInterval(crearCorazon, 500);
-    </script>
+<tr>
+<td>Diésel</td>
+<td>417.59</td>
+<td>487</td>
+<td>+69.41</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>Gráficos Comparativos</h2>
+
+<div class="decorationImages">
+<img src="https://i.ibb.co/m5HG96cZ/imagen-2.jpg" alt="Decoración">
+<img src="https://i.ibb.co/YFDWhRFR/imagen-1.jpg" alt="Decoración">
+</div>
+
+<div class="grid">
+
+<div class="chartBox">
+<canvas id="ventasMes"></canvas>
+</div>
+
+<div class="chartBox">
+<canvas id="ventasCombustible"></canvas>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+Sistema de análisis de ventas de estación - Accesible desde cualquier dispositivo
+</footer>
+
+<script>
+
+const chartOptions = {
+responsive: true,
+maintainAspectRatio: true,
+plugins:{
+legend:{labels:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 14}}}
+},
+scales:{
+x:{ticks:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 12}}},
+y:{ticks:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 12}}}
+}
+};
+
+new Chart(document.getElementById("ventasMes"),{
+type:"bar",
+data:{
+labels:["Febrero","Marzo"],
+datasets:[{
+label:"Litros vendidos",
+data:[3370.79,3196],
+backgroundColor:["#ff0000","#8b0000"]
+}]
+},
+options: chartOptions
+});
+
+new Chart(document.getElementById("ventasCombustible"),{
+type:"pie",
+data:{
+labels:["Magna","Premium","Diésel"],
+datasets:[{
+data:[2484,516,487],
+backgroundColor:["#ff0000","#cc0000","#660000"]
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:true,
+plugins:{
+legend:{labels:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 14}}}
+}
+}
+});
+
+function generarPDF(){
+const elemento = document.getElementById('contenidoPDF');
+const opciones = {
+margin: 8,
+filename: 'Analisis_Ventas_Combustible.pdf',
+image: { type: 'jpeg', quality: 0.98 },
+html2canvas: { scale: 2, useCORS: true },
+jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+};
+html2pdf().set(opciones).from(elemento).save();
+}
+
+window.addEventListener('resize', function(){
+location.reload();
+});
+
+</script>
+
 </body>
 </html>
