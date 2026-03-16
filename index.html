@@ -15,6 +15,7 @@
         html, body {
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         body {
@@ -23,122 +24,30 @@
             align-items: center;
             background: linear-gradient(90deg, #f5b9d0 0%, #f8d8e0 25%, #fffaf0 50%, #f8d8e0 75%, #f5b9d0 100%);
             font-family: 'Cormorant Garamond', serif;
-            overflow: hidden;
+            padding: 0;
+            margin: 0;
         }
 
         /* --- CONTENEDOR PRINCIPAL (CARTA) --- */
-        .carta-contenedor {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
         .carta {
             width: 100%;
+            height: 100%;
             max-width: 500px;
-            height: 100vh;
-            max-height: 900px;
             background: linear-gradient(180deg, #fffaf0 0%, #fff5f8 50%, #fffaf0 100%);
-            border: 8px solid #f5b9d0;
-            border-radius: 8px;
-            box-shadow: 
-                0 0 0 20px #f5b9d0,
-                0 20px 60px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            position: relative;
+            border: none;
+            border-radius: 0;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             animation: aparicionCarta 1s ease-out;
+            position: relative;
         }
 
         @keyframes aparicionCarta {
             from {
                 opacity: 0;
-                transform: scale(0.95) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        /* --- DECORACIÓN LATERAL IZQUIERDA --- */
-        .decoracion-lateral-izq {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 60px;
-            background: linear-gradient(90deg, rgba(245, 185, 208, 0.4) 0%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            padding: 40px 0;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .decoracion-lateral-der {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 60px;
-            background: linear-gradient(90deg, transparent 0%, rgba(245, 185, 208, 0.4) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            padding: 40px 0;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .corazon-decorativo {
-            font-size: 1.2rem;
-            opacity: 0.5;
-            animation: flotaDecoración 4s ease-in-out infinite;
-        }
-
-        @keyframes flotaDecoración {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .contenido {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 18px 16px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            overflow-y: auto;
-            gap: 10px;
-        }
-
-        /* --- TEXTO SUPERIOR --- */
-        .texto-superior {
-            color: #d81b60;
-            font-size: 1.2rem;
-            font-style: italic;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-            animation: aparicionTexto 1s ease-out 0.2s both;
-        }
-
-        @keyframes aparicionTexto {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -146,17 +55,59 @@
             }
         }
 
-        /* --- FOTO DE LA NOVIA - MUCHO MAS GRANDE --- */
+        /* --- DECORACIÓN LATERAL --- */
+        .decoracion-lateral-izq,
+        .decoracion-lateral-der {
+            display: none;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .contenido {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 18px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            gap: 12px;
+        }
+
+        /* --- TEXTO SUPERIOR --- */
+        .texto-superior {
+            color: #d81b60;
+            font-size: 1.4rem;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: 0.3px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            animation: aparicionTexto 0.8s ease-out 0.2s both;
+            margin-top: 10px;
+        }
+
+        @keyframes aparicionTexto {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- FOTO DE LA NOVIA - OPTIMIZADA PARA MOBILE --- */
         .foto-novia-contenedor {
             position: relative;
             width: 100%;
-            height: 240px;
-            border-radius: 12px;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: aparicionFoto 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
-            flex-shrink: 0;
-            margin: 8px 0;
+            margin: 12px 0;
         }
 
         .foto-novia {
@@ -182,17 +133,18 @@
         .nombre-sara {
             color: #d81b60;
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: 700;
             animation: aparicionNombre 1s ease-out 0.3s both;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             letter-spacing: 2px;
+            margin: 8px 0;
         }
 
         @keyframes aparicionNombre {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.85);
             }
             to {
                 opacity: 1;
@@ -206,8 +158,9 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            height: 45px;
+            height: 60px;
             flex-shrink: 0;
+            margin: 8px 0;
         }
 
         .corazon-flotante {
@@ -220,41 +173,42 @@
         .corazon-1 {
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2.6rem;
+            font-size: 3rem;
             animation: latidoPrincipal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
         }
 
         .corazon-2 {
-            top: 20px;
-            left: 20%;
+            top: 25px;
+            left: 15%;
             animation-delay: 0.1s;
         }
 
         .corazon-3 {
-            top: 20px;
-            right: 20%;
+            top: 25px;
+            right: 15%;
             animation-delay: 0.2s;
         }
 
         @keyframes latidoPrincipal {
             0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.15); }
+            50% { transform: translateX(-50%) scale(1.2); }
         }
 
         @keyframes flotaCorazon {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.1); }
+            50% { transform: translateY(-12px) scale(1.1); }
         }
 
         /* --- TEXTO DEL MENSAJE --- */
         .texto-mensaje {
             color: #ad1457;
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-style: italic;
-            line-height: 1.4;
+            line-height: 1.6;
             text-align: justify;
             animation: aparicionTexto 1s ease-out 0.4s both;
-            padding: 0 6px;
+            padding: 0 8px;
+            margin: 10px 0;
         }
 
         .texto-mensaje strong {
@@ -265,26 +219,26 @@
         /* --- CONTADOR --- */
         .texto-inferior {
             color: #ad1457;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-style: italic;
             animation: aparicionTexto 1s ease-out 0.5s both;
+            margin-top: 10px;
         }
 
         #contador {
-            font-size: 1rem;
+            font-size: 1.3rem;
             color: #d81b60;
             font-weight: bold;
-            margin-top: 6px;
-            padding: 10px 16px;
+            margin-top: 10px;
+            padding: 15px 20px;
             background: linear-gradient(135deg, rgba(216, 27, 96, 0.12) 0%, rgba(173, 20, 87, 0.06) 100%);
-            border-left: 5px solid #d81b60;
+            border-left: 6px solid #d81b60;
             border-radius: 10px;
             box-shadow: 
                 inset 0 1px 3px rgba(255, 255, 255, 0.6),
                 0 4px 12px rgba(216, 27, 96, 0.15);
             animation: pulsoContador 2s ease-in-out infinite;
-            letter-spacing: 0.2px;
-            font-size: 0.9rem;
+            letter-spacing: 0.3px;
         }
 
         @keyframes pulsoContador {
@@ -298,7 +252,7 @@
                 box-shadow: 
                     inset 0 1px 3px rgba(255, 255, 255, 0.6),
                     0 4px 12px rgba(216, 27, 96, 0.15),
-                    0 0 0 10px rgba(216, 27, 96, 0);
+                    0 0 0 12px rgba(216, 27, 96, 0);
             }
         }
 
@@ -311,10 +265,12 @@
         .firma {
             color: #d81b60;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             font-weight: 700;
             animation: aparicionFirma 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
             flex-shrink: 0;
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
 
         @keyframes aparicionFirma {
@@ -346,40 +302,125 @@
             }
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 600px) {
+        /* --- RESPONSIVE EXTRA OPTIMIZADO --- */
+        @media (max-width: 800px) {
+            body {
+                padding: 0;
+            }
+
             .carta {
-                border-width: 6px;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                max-width: 100%;
             }
 
             .contenido {
-                padding: 16px 13px;
+                padding: 20px 16px;
+                gap: 10px;
+            }
+
+            .texto-superior {
+                font-size: 1.35rem;
+                margin-top: 15px;
+            }
+
+            .nombre-sara {
+                font-size: 2.3rem;
+                margin: 10px 0;
+            }
+
+            .foto-novia-contenedor {
+                aspect-ratio: 3 / 2;
+                margin: 15px 0;
+                border-radius: 12px;
+            }
+
+            .texto-mensaje {
+                font-size: 1rem;
+                line-height: 1.6;
+                padding: 0 8px;
+            }
+
+            #contador {
+                font-size: 1.25rem;
+                padding: 14px 18px;
+                margin-top: 12px;
+            }
+
+            .firma {
+                font-size: 1.3rem;
+                margin-top: 12px;
+                margin-bottom: 20px;
+            }
+
+            .zona-corazones {
+                height: 55px;
+                margin: 10px 0;
+            }
+
+            .corazon-1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contenido {
+                padding: 18px 14px;
                 gap: 8px;
             }
 
             .texto-superior {
-                font-size: 1.1rem;
+                font-size: 1.25rem;
+                line-height: 1.25;
+                margin-top: 12px;
+                br {
+                    display: none;
+                }
             }
 
             .nombre-sara {
-                font-size: 1.8rem;
+                font-size: 2.1rem;
+                margin: 8px 0;
             }
 
             .foto-novia-contenedor {
-                height: 200px;
+                aspect-ratio: 3 / 2;
+                margin: 12px 0;
+                border-radius: 10px;
             }
 
             .texto-mensaje {
-                font-size: 0.8rem;
+                font-size: 0.95rem;
+                line-height: 1.5;
+                padding: 0 6px;
+                margin: 8px 0;
             }
 
             #contador {
-                font-size: 0.85rem;
-                padding: 8px 13px;
+                font-size: 1.15rem;
+                padding: 12px 16px;
+                margin-top: 10px;
             }
 
             .firma {
-                font-size: 1rem;
+                font-size: 1.2rem;
+                margin-top: 10px;
+                margin-bottom: 18px;
+            }
+
+            .zona-corazones {
+                height: 50px;
+                margin: 8px 0;
+            }
+
+            .corazon-1 {
+                font-size: 2.5rem;
+            }
+
+            .corazon-2,
+            .corazon-3 {
+                font-size: 1.8rem;
             }
         }
 
@@ -393,7 +434,7 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
             pointer-events: none;
             animation: brilloSutil 5s ease-in-out infinite;
-            border-radius: 8px 8px 0 0;
+            z-index: 1;
         }
 
         @keyframes brilloSutil {
@@ -407,58 +448,46 @@
     </style>
 </head>
 <body>
-    <div class="carta-contenedor">
-        <div class="carta">
-            <div class="brillo"></div>
+    <div class="carta">
+        <div class="brillo"></div>
 
-            <!-- Decoraciones laterales -->
-            <div class="decoracion-lateral-izq">
-                <span class="corazon-decorativo">💗</span>
-                <span class="corazon-decorativo">💕</span>
-            </div>
-            <div class="decoracion-lateral-der">
-                <span class="corazon-decorativo">💗</span>
-                <span class="corazon-decorativo">💕</span>
+        <!-- Contenido principal -->
+        <div class="contenido">
+            <!-- Texto superior -->
+            <div class="texto-superior">
+                Si pudiera elegir un lugar seguro, sería a tu lado. Cuanto más tiempo estoy contigo,<br><em>más te amo...</em>
             </div>
 
-            <!-- Contenido principal -->
-            <div class="contenido">
-                <!-- Texto superior -->
-                <div class="texto-superior">
-                    Si pudiera elegir un lugar seguro, sería a tu lado. Cuanto más tiempo estoy contigo,<br><em>más te amo...</em>
-                </div>
-
-                <!-- FOTO DE SARA - MUCHO MAS GRANDE -->
-                <div class="foto-novia-contenedor">
-                    <img src="https://i.ibb.co/fzJRP91x/ooo.jpg" alt="Sara" class="foto-novia" id="fotoNovia">
-                </div>
-
-                <!-- NOMBRE DE SARA -->
-                <div class="nombre-sara">Sara ✨</div>
-
-                <!-- Corazones flotantes -->
-                <div class="zona-corazones">
-                    <div class="corazon-flotante corazon-1">❤️</div>
-                    <div class="corazon-flotante corazon-2">💗</div>
-                    <div class="corazon-flotante corazon-3">💗</div>
-                </div>
-
-                <!-- NUEVO TEXTO DEL MENSAJE -->
-                <div class="texto-mensaje">
-                    <strong>Puedes escuchar mis palabras.</strong> Te extraño mucho y quiero pedirte perdón por todo. Sé que a veces me confundo y no siempre sé bien lo que quiero, pero eso no significa que no me importes.<br><br>
-                    La verdad me dolió mucho saber que tu mamá te pegó y que te faltó al respeto. <strong>No me gusta que alguien te lastime, porque me importas demasiado,</strong> y por eso reaccioné así.<br><br>
-                    Aun así, me gustaría que intentáramos hablar y ver cómo podemos solucionar las cosas entre nosotros.
-                </div>
-
-                <!-- Texto inferior con contador -->
-                <div class="texto-inferior">
-                    Nuestros caminos se cruzaron hace...
-                    <div id="contador">Cargando tiempo...</div>
-                </div>
-
-                <!-- Firma -->
-                <div class="firma">Con todo mi amor 💕</div>
+            <!-- FOTO DE SARA - OPTIMIZADA PARA MOBILE -->
+            <div class="foto-novia-contenedor">
+                <img src="https://i.ibb.co/fzJRP91x/ooo.jpg" alt="Sara" class="foto-novia" id="fotoNovia">
             </div>
+
+            <!-- NOMBRE DE SARA -->
+            <div class="nombre-sara">Sara ✨</div>
+
+            <!-- Corazones flotantes -->
+            <div class="zona-corazones">
+                <div class="corazon-flotante corazon-1">❤️</div>
+                <div class="corazon-flotante corazon-2">💗</div>
+                <div class="corazon-flotante corazon-3">💗</div>
+            </div>
+
+            <!-- NUEVO TEXTO DEL MENSAJE -->
+            <div class="texto-mensaje">
+                <strong>Puedes escuchar mis palabras.</strong> Te extraño mucho y quiero pedirte perdón por todo. Sé que a veces me confundo y no siempre sé bien lo que quiero, pero eso no significa que no me importes.<br><br>
+                La verdad me dolió mucho saber que tu mamá te pegó y que te faltó al respeto. <strong>No me gusta que alguien te lastime, porque me importas demasiado,</strong> y por eso reaccioné así.<br><br>
+                Aun así, me gustaría que intentáramos hablar y ver cómo podemos solucionar las cosas entre nosotros.
+            </div>
+
+            <!-- Texto inferior con contador -->
+            <div class="texto-inferior">
+                Nuestros caminos se cruzaron hace...
+                <div id="contador">Cargando tiempo...</div>
+            </div>
+
+            <!-- Firma -->
+            <div class="firma">Con todo mi amor 💕</div>
         </div>
     </div>
 
