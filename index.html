@@ -2,281 +2,75 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Análisis de Ventas - Estación</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<title>Capacitación Nómina</title>
 
 <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #e6e6e6;
+    }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+    header {
+        background-color: #c40000;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 22px;
+    }
 
-body{
-font-family:"Segoe UI", Arial, sans-serif;
-background:#0c0c0c;
-color:white;
-line-height:1.7;
-}
+    .container {
+        padding: 20px;
+    }
 
-header{
-background:linear-gradient(135deg,#b30000,#7a0000);
-padding:35px 20px;
-text-align:center;
-font-size:clamp(24px,4vw,34px);
-font-weight:700;
-letter-spacing:1px;
-box-shadow:0 6px 18px rgba(0,0,0,0.5);
-}
+    .section {
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
-.container{
-width:92%;
-max-width:1200px;
-margin:auto;
-padding:30px 0;
-}
+    /* Encabezados tipo Excel */
+    .title {
+        background-color: #1f4e79;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+    }
 
-.pdfButton{
-background:#ff3b3b;
-color:white;
-padding:16px 36px;
-border:none;
-border-radius:8px;
-font-size:15px;
-cursor:pointer;
-margin:0 auto 35px auto;
-font-weight:600;
-transition:all .25s;
-display:block;
-box-shadow:0 6px 18px rgba(255,0,0,0.35);
-}
+    /* Contenido amarillo */
+    .content {
+        background-color: #fff3a6;
+        padding: 15px;
+    }
 
-.pdfButton:hover{
-background:#b30000;
-transform:translateY(-2px);
-box-shadow:0 10px 22px rgba(255,0,0,0.4);
-}
+    /* Cuadros azules */
+    .box-blue {
+        background-color: #cfe2f3;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
 
-.section{
-background:#141414;
-padding:35px;
-margin-bottom:35px;
-border-radius:12px;
-border-left:6px solid #ff3b3b;
-box-shadow:0 6px 20px rgba(0,0,0,0.6);
-transition:all .25s;
-}
+    /* Cuadros naranja */
+    .box-orange {
+        background-color: #f4b183;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
 
-.section:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 28px rgba(0,0,0,0.8);
-}
+    ul {
+        margin-left: 20px;
+    }
 
-h2{
-color:#ff3b3b;
-margin-bottom:22px;
-font-size:clamp(20px,3vw,26px);
-border-bottom:2px solid #ff3b3b;
-padding-bottom:10px;
-}
-
-p{
-line-height:1.8;
-font-size:15px;
-margin-bottom:18px;
-color:#dcdcdc;
-}
-
-.highlight{
-color:#ff4d4d;
-font-weight:600;
-}
-
-.decorationImages{
-display:grid;
-grid-template-columns:1fr;
-gap:25px;
-margin:35px 0;
-padding:20px;
-background:#101010;
-border-radius:10px;
-border:1px solid #222;
-}
-
-.decorationImages img{
-width:100%;
-border-radius:8px;
-opacity:.9;
-transition:.3s;
-}
-
-.decorationImages img:hover{
-transform:scale(1.03);
-opacity:1;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr;
-gap:30px;
-margin-top:25px;
-}
-
-.chartBox{
-background:#1a1a1a;
-padding:25px;
-border-radius:12px;
-border:1px solid #262626;
-min-height:340px;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 4px 15px rgba(0,0,0,0.5);
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:25px;
-font-size:14px;
-border-radius:10px;
-overflow:hidden;
-}
-
-th{
-background:#b30000;
-padding:15px;
-text-align:center;
-font-weight:600;
-}
-
-td{
-padding:14px;
-text-align:center;
-background:#1c1c1c;
-border-bottom:1px solid #2a2a2a;
-}
-
-tr:hover td{
-background:#252525;
-}
-
-footer{
-text-align:center;
-padding:22px;
-background:#0a0a0a;
-color:#8a8a8a;
-font-size:13px;
-margin-top:40px;
-border-top:2px solid #b30000;
-}
-
-@media(min-width:768px){
-
-.decorationImages{
-grid-template-columns:1fr 1fr;
-}
-
-.grid{
-grid-template-columns:1fr 1fr;
-}
-
-.container{
-padding:40px 0;
-}
-
-.section{
-padding:40px;
-}
-
-}
-
-@media(max-width:480px){
-
-header{
-padding:25px 15px;
-}
-
-.section{
-padding:20px;
-margin-bottom:20px;
-}
-
-p{
-font-size:14px;
-}
-
-.chartBox{
-min-height:260px;
-}
-
-table{
-font-size:12px;
-}
-
-th,td{
-padding:10px 6px;
-}
-
-}
-
-@print{
-
-.pdfButton{display:none}
-.decorationImages{display:none}
-
-body{
-background:white;
-color:black;
-}
-
-.section{
-background:white;
-border-left:5px solid black;
-box-shadow:none;
-page-break-inside:avoid;
-}
-
-header{
-background:white;
-color:black;
-border-bottom:2px solid black;
-}
-
-h2{
-color:black;
-border-bottom:2px solid black;
-}
-
-table{
-color:black;
-}
-
-th{
-background:#ccc;
-color:black;
-}
-
-td{
-background:white;
-border-bottom:1px solid #ddd;
-}
-
-p{
-color:black;
-}
-
-.highlight{
-color:black;
-font-weight:bold;
-}
-
-}
+    .important {
+        background-color: #f8d7da;
+        padding: 10px;
+        margin-top: 10px;
+        border-left: 5px solid red;
+        border-radius: 5px;
+    }
 
 </style>
 </head>
@@ -284,179 +78,134 @@ font-weight:bold;
 <body>
 
 <header>
-ANALISIS DE VENTA EDS Amozoc 2 
+    FULLGAS - Capacitación de Nómina
 </header>
 
 <div class="container">
 
-<button class="pdfButton" onclick="generarPDF()">Descargar como PDF</button>
+    <div class="section">
+        <div class="title">1. Identificar la semana</div>
+        <div class="content">
+            <p>Primero se debe identificar la semana que se tiene que llenar.</p>
+            <p>Ejemplo: Si fue la <b>semana 11</b>, sigue la <b>semana 12</b>.</p>
+            <p>Ya identificada la semana, se continúa con el siguiente paso.</p>
+        </div>
+    </div>
 
-<div id="contenidoPDF">
+    <div class="section">
+        <div class="title">2. Copiar datos del personal, estación y zona</div>
+        <div class="content">
 
-<div class="section">
+            <p>Se copia la siguiente información:</p>
+            <ul>
+                <li>Apellido paterno</li>
+                <li>Apellido materno</li>
+                <li>Nombre</li>
+                <li>Fecha de ingreso</li>
+                <li>Puesto</li>
+                <li>Estación</li>
+            </ul>
 
-<h2>Reporte de Análisis</h2>
+            <div class="important">
+                Verificar que todos los datos estén correctos, la fecha de ingreso esté bien y el puesto sea correcto.  
+                Si no, no se puede enviar la nómina.
+            </div>
 
-<p>
-Durante los primeros 15 días del mes de marzo se realizó un análisis de ventas en la estación, obteniendo una venta total de <span class="highlight">3,196 litros</span>, así como la venta de <span class="highlight">17 periféricos</span>. 
-Al compararlo con el mes de febrero, donde se registró un promedio de <span class="highlight">3,370.79 litros</span> y <span class="highlight">18 periféricos</span>, se observa una disminución de <span class="highlight">174.79 litros</span>, lo que representa aproximadamente una baja del <span class="highlight">5.18 %</span> en la venta total. 
-En cuanto a periféricos, se registra <span class="highlight">1 unidad menos vendida</span>, equivalente a una disminución del <span class="highlight">5.56 %</span>.
-</p>
+            <p>Al poner <b>Amozoc 2</b>, automáticamente se asigna la zona.</p>
 
-<p>
-Cabe mencionar que esta variación en las ventas se encuentra directamente relacionada con los desabastos registrados en ambos meses. Durante el mes de febrero se presentó desabasto de gasolina premium, mientras que en marzo se ha presentado desabasto de diésel, el cual aún continúa. Esta situación ya fue reportada a los encargados del departamento correspondiente; sin embargo, se nos informó que debido al promedio de venta de la estación no es posible surtir diésel por el momento, ya que existe escasez de este combustible y se está dando prioridad a estaciones con mayor volumen de venta.
-</p>
+            <p>Al ingresar los datos del trabajador:</p>
+            <ul>
+                <li>Nombre</li>
+                <li>Fecha de ingreso</li>
+            </ul>
 
-<p>
-En cuanto al desglose por producto, durante los 15 días analizados de marzo se vendieron <span class="highlight">2,484 litros de gasolina magna</span>, <span class="highlight">516 litros de premium</span> y <span class="highlight">487 litros de diésel</span>. Comparándolo con febrero, donde se registraron <span class="highlight">2,785.53 litros de magna</span>, <span class="highlight">167.66 litros de premium</span> y <span class="highlight">417.59 litros de diésel</span>, se observa que magna presentó una disminución de <span class="highlight">301.53 litros</span>, equivalente a una baja del <span class="highlight">10.82 %</span>.
-</p>
+            <p>Se genera automáticamente el salario y sueldo base.</p>
 
-<p>
-Por otro lado, premium presentó un aumento de <span class="highlight">348.34 litros</span>, lo que representa un incremento aproximado del <span class="highlight">207.77 %</span>, reflejando la recuperación en ventas después del desabasto de este combustible que se presentó durante el mes de febrero.
-</p>
+            <div class="box-blue">
+                Los puestos deben coincidir con la fecha de ingreso:
+                <ul>
+                    <li>Confianza (Mayor a un año)</li>
+                    <li>Anfitrión (Mayor a un año)</li>
+                    <li>Confianza (Menor a un año)</li>
+                </ul>
+            </div>
 
-<p>
-En el caso del diésel, se registra un aumento de <span class="highlight">69.41 litros</span>, equivalente a un incremento aproximado del <span class="highlight">16.62 %</span>; esto a pesar de que actualmente continúa el desabasto de diésel durante el mes de marzo, lo cual ha limitado la venta normal de este combustible en la estación.
-</p>
+            <p>Actualmente somos zona Puebla 3.</p>
 
-<p>
-En conclusión, la variación en los volúmenes de venta entre ambos meses se encuentra directamente influenciada por los problemas de abastecimiento de combustible, principalmente premium en febrero y diésel en marzo, situación que impacta directamente el comportamiento normal de ventas de la estación.
-</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title">Repaso general</div>
+        <div class="content">
+
+            <p>Solo se debe copiar la información.</p>
+            <p>Copiar desde <b>estación hasta puesto</b>.</p>
+
+            <div class="box-blue">
+                <b>Primera vez:</b>
+                <ul>
+                    <li>Estación: Amozoc 2</li>
+                    <li>Primero se pone confianza</li>
+                    <li>Nombre: Hugo Joshua Montellano Barajas</li>
+                    <li>Fecha: 01/04/2024</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title">3. Días laborados</div>
+        <div class="content">
+            <div class="box-blue">
+                Si no faltó → 6 días laborados
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title">4. Vacaciones</div>
+        <div class="content">
+            <div class="box-blue">
+                Se agregan las vacaciones.<br>
+                6 días o 7 con descanso para salario completo.
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title">5. Faltas</div>
+        <div class="content">
+            <div class="box-orange">
+                Faltas: 1<br>
+                Laborados: 5
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="title">Observaciones</div>
+        <div class="content">
+
+            <ul>
+                <li>Registrar faltas</li>
+                <li>Registrar observaciones</li>
+                <li>Registrar turnos extras</li>
+            </ul>
+
+            <div class="important">
+                Para turnos extras:
+                <ul>
+                    <li>Pedir autorización por WhatsApp</li>
+                    <li>Llenar formato de turnos</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 
 </div>
-
-<div class="section">
-
-<h2>Tabla de Desglose de Combustible</h2>
-
-<table>
-
-<tr>
-<th>Combustible</th>
-<th>Febrero</th>
-<th>Marzo</th>
-<th>Diferencia</th>
-</tr>
-
-<tr>
-<td>Magna</td>
-<td>2,785.53</td>
-<td>2,484</td>
-<td>-301.53</td>
-</tr>
-
-<tr>
-<td>Premium</td>
-<td>167.66</td>
-<td>516</td>
-<td>+348.34</td>
-</tr>
-
-<tr>
-<td>Diésel</td>
-<td>417.59</td>
-<td>487</td>
-<td>+69.41</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="section">
-
-<h2>AMOZOC 2 </h2>
-
-<div class="decorationImages">
-
-<a href="https://ibb.co/BKBp85B1">
-<img src="https://i.ibb.co/BKBp85B1/EDS.jpg" alt="EDS">
-</a>
-
-</div>
-
-<div class="grid">
-
-<div class="chartBox">
-<canvas id="ventasMes"></canvas>
-</div>
-
-<div class="chartBox">
-<canvas id="ventasCombustible"></canvas>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<footer>
-Análisis de ventas elaborado por el personal de confianza, Joshua Montellano, de la EDS Amozoc II
-</footer>
-
-<script>
-
-const chartOptions = {
-responsive: true,
-maintainAspectRatio: true,
-plugins:{
-legend:{labels:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 14}}}
-},
-scales:{
-x:{ticks:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 12}}},
-y:{ticks:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 12}}}
-}
-};
-
-new Chart(document.getElementById("ventasMes"),{
-type:"bar",
-data:{
-labels:["Febrero","Marzo"],
-datasets:[{
-label:"Litros vendidos",
-data:[3370.79,3196],
-backgroundColor:["#ff0000","#8b0000"]
-}]
-},
-options: chartOptions
-});
-
-new Chart(document.getElementById("ventasCombustible"),{
-type:"pie",
-data:{
-labels:["Magna","Premium","Diésel"],
-datasets:[{
-data:[2484,516,487],
-backgroundColor:["#ff0000","#cc0000","#660000"]
-}]
-},
-options:{
-responsive:true,
-maintainAspectRatio:true,
-plugins:{
-legend:{labels:{color:"white", font:{size: window.innerWidth < 768 ? 10 : 14}}}
-}
-}
-});
-
-function generarPDF(){
-const elemento = document.getElementById('contenidoPDF');
-const opciones = {
-margin: 8,
-filename: 'Analisis_Ventas_Combustible.pdf',
-image: { type: 'jpeg', quality: 0.98 },
-html2canvas: { scale: 2, useCORS: true },
-jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-};
-html2pdf().set(opciones).from(elemento).save();
-}
-
-window.addEventListener('resize', function(){
-location.reload();
-});
-
-</script>
 
 </body>
 </html>
