@@ -3,293 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <title>Capacitación Nómina FULLGAS</title>
-
 <style>
-body{
-    margin:0;
-    font-family:Arial;
-    background:#e6e6e6;
-    transition: all .5s;
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #d0d7de;
 }
-
 /* HEADER */
-header{
-    background:#c40000;
-    color:white;
-    padding:15px;
-    text-align:center;
-    font-weight:bold;
+header {
+    background: linear-gradient(135deg, #c40000, #8b0000);
+    color: white;
+    padding: 28px 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
-/* MENU */
-.menu{
-    background:#1f4e79;
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    padding:10px;
+/* CONTENEDOR */
+.container {
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto;
 }
-
-.menu button{
-    background:#fff3a6;
-    border:none;
-    padding:10px;
-    cursor:pointer;
-    border-radius:5px;
-    font-weight:bold;
-    transition:.3s;
+/* SECCIONES */
+.section {
+    margin-bottom: 35px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-
-.menu button:hover{
-    background:#f4b183;
+/* TITULOS */
+.title {
+    background: linear-gradient(135deg, #1f4e79, #2e75b6);
+    color: white;
+    padding: 12px 16px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
 }
-
-/* PANTALLAS */
-.pantalla{
-    display:none;
-    padding:20px;
-    animation: fade .5s;
+/* CONTENIDO */
+.content {
+    background: #fffef5;
+    padding: 20px 25px;
+    border: 1px solid #e0dbb0;
 }
-
-.activa{
-    display:block;
+/* DIAGRAMA */
+.flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 25px;
+    background: #f9f9f9;
 }
-
-@keyframes fade{
-    from{opacity:0; transform:translateY(10px);}
-    to{opacity:1;}
-}
-
 /* CAJAS */
-.box{
-    background:#fff3a6;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:10px;
+.box {
+    width: 320px;
+    padding: 14px 18px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+    cursor: default;
 }
-
-.title{
-    background:#1f4e79;
-    color:white;
-    padding:10px;
-    margin-bottom:10px;
+.box:hover {
+    transform: scale(1.03);
 }
-
-/* BOTONES */
-.nav-btn button{
-    margin:5px;
-    padding:10px;
-    border:none;
-    background:#1f4e79;
-    color:white;
-    border-radius:5px;
-    cursor:pointer;
+/* COLORES */
+.blue   { background: #cfe2f3; border-left: 5px solid #2e75b6; }
+.yellow { background: #fff9c4; border-left: 5px solid #f0c300; }
+.orange { background: #ffe0c3; border-left: 5px solid #e07000; }
+.red    { background: #fde8ea; border-left: 5px solid #c40000; }
+/* FLECHAS */
+.arrow {
+    font-size: 22px;
+    color: #555;
+    line-height: 1;
 }
-
-.nav-btn button:hover{
-    background:#c40000;
+/* TEXTO */
+ul { text-align: left; padding-left: 20px; }
+li { margin-bottom: 5px; }
+h3 {
+    color: #1f4e79;
+    border-bottom: 2px solid #cfe2f3;
+    padding-bottom: 5px;
+    margin-top: 20px;
 }
-
-/* SIMULADOR */
-input{
-    padding:8px;
-    margin:5px;
-    width:200px;
+p { line-height: 1.6; color: #333; }
+/* NOTAS */
+.note {
+    background: #fde8ea;
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-left: 5px solid #c40000;
+    border-radius: 0 8px 8px 0;
 }
-
-/* RESULTADO */
-.resultado{
-    background:#cfe2f3;
-    padding:10px;
-    margin-top:10px;
-    border-radius:5px;
-}
-
-/* EXAMEN */
-.correcto{color:green;}
-.incorrecto{color:red;}
-
+b { color: #c40000; }
 </style>
 </head>
-
 <body>
-
-<header>FULLGAS - Capacitación de Nómina</header>
-
-<div class="menu">
-<button onclick="mostrar('inicio')">Inicio</button>
-<button onclick="mostrar('paso1')">Semana</button>
-<button onclick="mostrar('paso2')">Datos</button>
-<button onclick="mostrar('paso3')">Días</button>
-<button onclick="mostrar('paso4')">Vacaciones</button>
-<button onclick="mostrar('paso5')">Faltas</button>
-<button onclick="mostrar('observaciones')">Obs</button>
-<button onclick="mostrar('simulador')">Simulador</button>
-<button onclick="mostrar('examen')">Examen</button>
-</div>
-
-<!-- INICIO -->
-<div id="inicio" class="pantalla activa">
-<div class="title">Bienvenido</div>
-<div class="box">
-<p>Capacitación completa de nómina.</p>
-<button onclick="mostrar('paso1')">Comenzar</button>
-</div>
-</div>
-
-<!-- PASO 1 -->
-<div id="paso1" class="pantalla">
-<div class="title">1. Identificar semana</div>
-<div class="box">
-<p>Si fue semana 11 → sigue 12.</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('inicio')">Anterior</button>
-<button onclick="mostrar('paso2')">Siguiente</button>
+<header>
+🔴 FULLGAS Nómina 🔴 
+</header>
+<div class="container">
+<!-- DIAGRAMA -->
+<div class="section">
+<div class="title">📊 Diagrama de flujo del proceso</div>
+<div class="flow">
+<div class="box blue">1. Identificar semana</div>
+<div class="arrow">⬇</div>
+<div class="box yellow">2. Copiar datos (Empleado + Estación)</div>
+<div class="arrow">⬇</div>
+<div class="box blue">Sistema asigna Zona, Salario y Sueldo</div>
+<div class="arrow">⬇</div>
+<div class="box yellow">3. Llenar días laborados</div>
+<div class="arrow">⬇</div>
+<div class="box blue">4. Vacaciones (si aplica)</div>
+<div class="arrow">⬇</div>
+<div class="box orange">5. Faltas (descuento automático)</div>
+<div class="arrow">⬇</div>
+<div class="box red">Observaciones + Autorizaciones</div>
 </div>
 </div>
-
-<!-- PASO 2 -->
-<div id="paso2" class="pantalla">
-<div class="title">2. Datos</div>
-<div class="box">
-<p>Copiar:</p>
+<!-- CONTENIDO COMPLETO -->
+<div class="section">
+<div class="title">📋 Proceso completo</div>
+<div class="content">
+<h3>1. Identificar la semana</h3>
+<p>Primero se debe identificar la semana que se tiene que llenar.</p>
+<p>Ejemplo: Si fue la semana 11, sigue la semana 12.</p>
+<p>Ya identificada la semana, se continúa con el siguiente paso.</p>
+<h3>2. Copiar datos del personal, estación y zona</h3>
 <ul>
+<li>Apellido paterno</li>
+<li>Apellido materno</li>
 <li>Nombre</li>
-<li>Fecha ingreso</li>
+<li>Fecha de ingreso</li>
 <li>Puesto</li>
 <li>Estación</li>
 </ul>
-
-<p>Zona aparece como Puebla 2 (aunque ya es 3).</p>
-<p>Se genera salario automático.</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('paso1')">Anterior</button>
-<button onclick="mostrar('paso3')">Siguiente</button>
-</div>
-</div>
-
-<!-- PASO 3 -->
-<div id="paso3" class="pantalla">
-<div class="title">3. Días</div>
-<div class="box">
-<p>Si no faltó → 6 días.</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('paso2')">Anterior</button>
-<button onclick="mostrar('paso4')">Siguiente</button>
-</div>
-</div>
-
-<!-- PASO 4 -->
-<div id="paso4" class="pantalla">
-<div class="title">4. Vacaciones</div>
-<div class="box">
-<p>Se ponen 7 días obligatorios.</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('paso3')">Anterior</button>
-<button onclick="mostrar('paso5')">Siguiente</button>
-</div>
-</div>
-
-<!-- PASO 5 -->
-<div id="paso5" class="pantalla">
-<div class="title">5. Faltas</div>
-<div class="box">
+<p><b>IMPORTANTE:</b></p>
+<ul>
+<li>Verificar fecha de ingreso</li>
+<li>Verificar datos correctos</li>
+<li>Verificar puesto correcto</li>
+</ul>
+<p>Si no, no se puede enviar la nómina.</p>
+<p>Al poner Amozoc 2 (ejemplo) depende tu estacion → se asigna la zona automáticamente.</p>
+<p>Al ingresar datos → se genera salario y sueldo base.</p>
+<p>Puestos según antigüedad:</p>
+<ul>
+<li>Confianza (Mayor a un año)</li>
+<li>Anfitrión (Mayor a un año)</li>
+<li>Confianza (Menor a un año)</li>
+</ul>
+<p>Zona actual: Puebla 3</p>
+<h3>Repaso</h3>
+<p>Solo copiar desde estación hasta puesto.</p>
+<p><b>Primera vez:</b></p>
+<ul>
+<li>Estación: Amozoc 2</li>
+<li>Nombre: Hugo Joshua Montellano Barajas</li>
+<li>Fecha: 01/04/2024</li>
+<li>Puesto: Confianza</li>
+</ul>
+<h3>3. Días laborados</h3>
+<p>Si no faltó → 6 días</p>
+<h3>4. Vacaciones</h3>
+<p>Se ponen 6 o 7 días para salario completo.</p>
+<h3>5. Faltas</h3>
 <p>Faltas: 1</p>
 <p>Laborados: 5</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('paso4')">Anterior</button>
-<button onclick="mostrar('observaciones')">Siguiente</button>
-</div>
-</div>
-
-<!-- OBS -->
-<div id="observaciones" class="pantalla">
-<div class="title">Observaciones</div>
-<div class="box">
-<p>Registrar faltas, extras y notas.</p>
-<p>Extras requieren autorización por WhatsApp.</p>
-</div>
-<div class="nav-btn">
-<button onclick="mostrar('paso5')">Anterior</button>
-<button onclick="mostrar('simulador')">Siguiente</button>
+<h3>Observaciones</h3>
+<ul>
+<li>Registrar faltas</li>
+<li>Registrar observaciones</li>
+<li>Registrar turnos extras</li>
+</ul>
+<div class="note">
+Turnos extras:
+<ul>
+<li>Autorización por WhatsApp</li>
+<li>Llenar formato de turnos</li>
+</ul>
 </div>
 </div>
-
-<!-- SIMULADOR -->
-<div id="simulador" class="pantalla">
-<div class="title">Simulador</div>
-<div class="box">
-
-<input id="nombre" placeholder="Nombre">
-<input id="puesto" placeholder="Puesto">
-<input id="dias" placeholder="Días">
-
-<button onclick="calcular()">Calcular</button>
-
-<div id="resultado" class="resultado"></div>
-
-</div>
-
-<div class="nav-btn">
-<button onclick="mostrar('observaciones')">Anterior</button>
-<button onclick="mostrar('examen')">Siguiente</button>
 </div>
 </div>
-
-<!-- EXAMEN -->
-<div id="examen" class="pantalla">
-<div class="title">Examen</div>
-
-<div class="box">
-<p>1. ¿Cuántos días en vacaciones?</p>
-<button onclick="resp(this,true)">7</button>
-<button onclick="resp(this,false)">6</button>
-
-<p>2. ¿Qué pasa si falta?</p>
-<button onclick="resp(this,true)">Descuento</button>
-<button onclick="resp(this,false)">Nada</button>
-
-<p>3. Zona actual?</p>
-<button onclick="resp(this,true)">Puebla 3</button>
-<button onclick="resp(this,false)">Puebla 1</button>
-</div>
-
-<div id="resultadoExamen"></div>
-
-</div>
-
-<script>
-function mostrar(id){
-document.querySelectorAll('.pantalla').forEach(p=>p.classList.remove('activa'));
-document.getElementById(id).classList.add('activa');
-}
-
-function calcular(){
-let nombre=document.getElementById("nombre").value;
-let dias=document.getElementById("dias").value;
-
-document.getElementById("resultado").innerHTML=
-"Empleado: "+nombre+"<br>Zona: Puebla 2<br>Sueldo: $2000 (ejemplo)";
-}
-
-let puntos=0;
-function resp(btn,correcta){
-if(correcta){
-btn.classList.add("correcto");
-puntos++;
-}else{
-btn.classList.add("incorrecto");
-}
-
-document.getElementById("resultadoExamen").innerHTML=
-"Calificación: "+puntos;
-}
-</script>
-
 </body>
 </html>
