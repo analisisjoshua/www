@@ -2,75 +2,88 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Capacitación Nómina</title>
+<title>Capacitación Nómina FULLGAS</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #e6e6e6;
-    }
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #e6e6e6;
+}
 
-    header {
-        background-color: #c40000;
-        color: white;
-        padding: 20px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 22px;
-    }
+/* HEADER */
+header {
+    background: #c40000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
 
-    .container {
-        padding: 20px;
-    }
+/* CONTENEDOR */
+.container {
+    padding: 20px;
+}
 
-    .section {
-        margin-bottom: 20px;
-        border-radius: 8px;
-        overflow: hidden;
-    }
+/* SECCIONES */
+.section {
+    margin-bottom: 30px;
+}
 
-    /* Encabezados tipo Excel */
-    .title {
-        background-color: #1f4e79;
-        color: white;
-        padding: 10px;
-        font-weight: bold;
-    }
+/* TITULOS */
+.title {
+    background: #1f4e79;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
 
-    /* Contenido amarillo */
-    .content {
-        background-color: #fff3a6;
-        padding: 15px;
-    }
+/* CONTENIDO */
+.content {
+    background: #fff3a6;
+    padding: 15px;
+}
 
-    /* Cuadros azules */
-    .box-blue {
-        background-color: #cfe2f3;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-    }
+/* DIAGRAMA */
+.flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
 
-    /* Cuadros naranja */
-    .box-orange {
-        background-color: #f4b183;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-    }
+/* CAJAS */
+.box {
+    width: 300px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
 
-    ul {
-        margin-left: 20px;
-    }
+/* COLORES */
+.blue { background: #cfe2f3; }
+.yellow { background: #fff3a6; }
+.orange { background: #f4b183; }
+.red { background: #f8d7da; }
 
-    .important {
-        background-color: #f8d7da;
-        padding: 10px;
-        margin-top: 10px;
-        border-left: 5px solid red;
-        border-radius: 5px;
-    }
+/* FLECHAS */
+.arrow {
+    font-size: 25px;
+}
+
+/* TEXTO */
+ul { text-align: left; }
+
+/* NOTAS */
+.note {
+    background: #f8d7da;
+    padding: 10px;
+    margin-top: 10px;
+    border-left: 5px solid red;
+}
 
 </style>
 </head>
@@ -78,132 +91,121 @@
 <body>
 
 <header>
-    FULLGAS - Capacitación de Nómina
+FULLGAS - Capacitación Nómina (Flujo de Proceso)
 </header>
 
 <div class="container">
 
-    <div class="section">
-        <div class="title">1. Identificar la semana</div>
-        <div class="content">
-            <p>Primero se debe identificar la semana que se tiene que llenar.</p>
-            <p>Ejemplo: Si fue la <b>semana 11</b>, sigue la <b>semana 12</b>.</p>
-            <p>Ya identificada la semana, se continúa con el siguiente paso.</p>
-        </div>
-    </div>
+<!-- DIAGRAMA -->
+<div class="section">
+<div class="title">Diagrama de flujo del proceso</div>
 
-    <div class="section">
-        <div class="title">2. Copiar datos del personal, estación y zona</div>
-        <div class="content">
+<div class="flow">
 
-            <p>Se copia la siguiente información:</p>
-            <ul>
-                <li>Apellido paterno</li>
-                <li>Apellido materno</li>
-                <li>Nombre</li>
-                <li>Fecha de ingreso</li>
-                <li>Puesto</li>
-                <li>Estación</li>
-            </ul>
+<div class="box blue">1. Identificar semana</div>
+<div class="arrow">⬇</div>
 
-            <div class="important">
-                Verificar que todos los datos estén correctos, la fecha de ingreso esté bien y el puesto sea correcto.  
-                Si no, no se puede enviar la nómina.
-            </div>
+<div class="box yellow">2. Copiar datos (Empleado + Estación)</div>
+<div class="arrow">⬇</div>
 
-            <p>Al poner <b>Amozoc 2</b>, automáticamente se asigna la zona.</p>
+<div class="box blue">Sistema asigna Zona, Salario y Sueldo</div>
+<div class="arrow">⬇</div>
 
-            <p>Al ingresar los datos del trabajador:</p>
-            <ul>
-                <li>Nombre</li>
-                <li>Fecha de ingreso</li>
-            </ul>
+<div class="box yellow">3. Llenar días laborados</div>
+<div class="arrow">⬇</div>
 
-            <p>Se genera automáticamente el salario y sueldo base.</p>
+<div class="box blue">4. Vacaciones (si aplica)</div>
+<div class="arrow">⬇</div>
 
-            <div class="box-blue">
-                Los puestos deben coincidir con la fecha de ingreso:
-                <ul>
-                    <li>Confianza (Mayor a un año)</li>
-                    <li>Anfitrión (Mayor a un año)</li>
-                    <li>Confianza (Menor a un año)</li>
-                </ul>
-            </div>
+<div class="box orange">5. Faltas (descuento automático)</div>
+<div class="arrow">⬇</div>
 
-            <p>Actualmente somos zona Puebla 3.</p>
+<div class="box red">Observaciones + Autorizaciones</div>
 
-        </div>
-    </div>
+</div>
+</div>
 
-    <div class="section">
-        <div class="title">Repaso general</div>
-        <div class="content">
+<!-- CONTENIDO COMPLETO -->
+<div class="section">
+<div class="title">Proceso completo</div>
+<div class="content">
 
-            <p>Solo se debe copiar la información.</p>
-            <p>Copiar desde <b>estación hasta puesto</b>.</p>
+<h3>1. Identificar la semana</h3>
+<p>Primero se debe identificar la semana que se tiene que llenar.</p>
+<p>Ejemplo: Si fue la semana 11, sigue la semana 12.</p>
+<p>Ya identificada la semana, se continúa con el siguiente paso.</p>
 
-            <div class="box-blue">
-                <b>Primera vez:</b>
-                <ul>
-                    <li>Estación: Amozoc 2</li>
-                    <li>Primero se pone confianza</li>
-                    <li>Nombre: Hugo Joshua Montellano Barajas</li>
-                    <li>Fecha: 01/04/2024</li>
-                </ul>
-            </div>
+<h3>2. Copiar datos del personal, estación y zona</h3>
 
-        </div>
-    </div>
+<ul>
+<li>Apellido paterno</li>
+<li>Apellido materno</li>
+<li>Nombre</li>
+<li>Fecha de ingreso</li>
+<li>Puesto</li>
+<li>Estación</li>
+</ul>
 
-    <div class="section">
-        <div class="title">3. Días laborados</div>
-        <div class="content">
-            <div class="box-blue">
-                Si no faltó → 6 días laborados
-            </div>
-        </div>
-    </div>
+<p><b>IMPORTANTE:</b></p>
+<ul>
+<li>Verificar fecha de ingreso</li>
+<li>Verificar datos correctos</li>
+<li>Verificar puesto correcto</li>
+</ul>
 
-    <div class="section">
-        <div class="title">4. Vacaciones</div>
-        <div class="content">
-            <div class="box-blue">
-                Se agregan las vacaciones.<br>
-                6 días o 7 con descanso para salario completo.
-            </div>
-        </div>
-    </div>
+<p>Si no, no se puede enviar la nómina.</p>
 
-    <div class="section">
-        <div class="title">5. Faltas</div>
-        <div class="content">
-            <div class="box-orange">
-                Faltas: 1<br>
-                Laborados: 5
-            </div>
-        </div>
-    </div>
+<p>Al poner Amozoc 2 → se asigna la zona automáticamente.</p>
 
-    <div class="section">
-        <div class="title">Observaciones</div>
-        <div class="content">
+<p>Al ingresar datos → se genera salario y sueldo base.</p>
 
-            <ul>
-                <li>Registrar faltas</li>
-                <li>Registrar observaciones</li>
-                <li>Registrar turnos extras</li>
-            </ul>
+<p>Puestos según antigüedad:</p>
+<ul>
+<li>Confianza (Mayor a un año)</li>
+<li>Anfitrión (Mayor a un año)</li>
+<li>Confianza (Menor a un año)</li>
+</ul>
 
-            <div class="important">
-                Para turnos extras:
-                <ul>
-                    <li>Pedir autorización por WhatsApp</li>
-                    <li>Llenar formato de turnos</li>
-                </ul>
-            </div>
+<p>Zona actual: Puebla 3</p>
 
-        </div>
-    </div>
+<h3>Repaso</h3>
+<p>Solo copiar desde estación hasta puesto.</p>
+
+<p><b>Primera vez:</b></p>
+<ul>
+<li>Estación: Amozoc 2</li>
+<li>Nombre: Hugo Joshua Montellano Barajas</li>
+<li>Fecha: 01/04/2024</li>
+<li>Puesto: Confianza</li>
+</ul>
+
+<h3>3. Días laborados</h3>
+<p>Si no faltó → 6 días</p>
+
+<h3>4. Vacaciones</h3>
+<p>Se ponen 6 o 7 días para salario completo.</p>
+
+<h3>5. Faltas</h3>
+<p>Faltas: 1</p>
+<p>Laborados: 5</p>
+
+<h3>Observaciones</h3>
+<ul>
+<li>Registrar faltas</li>
+<li>Registrar observaciones</li>
+<li>Registrar turnos extras</li>
+</ul>
+
+<div class="note">
+Turnos extras:
+<ul>
+<li>Autorización por WhatsApp</li>
+<li>Llenar formato de turnos</li>
+</ul>
+</div>
+
+</div>
+</div>
 
 </div>
 
