@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Capacitación Nómina FULLGAS</title>
+
 <style>
 body {
     font-family: Arial;
@@ -10,6 +11,7 @@ body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
     min-height: 100vh;
 }
+
 /* HEADER */
 header {
     background: linear-gradient(135deg, #c40000, #8b0000);
@@ -22,12 +24,14 @@ header {
     box-shadow: 0 6px 20px rgba(0,0,0,0.5);
     border-bottom: 4px solid #ff4444;
 }
+
 /* CONTENEDOR */
 .container {
     padding: 30px 20px;
     max-width: 900px;
     margin: 0 auto;
 }
+
 /* SECCIONES */
 .section {
     margin-bottom: 35px;
@@ -36,6 +40,7 @@ header {
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     border: 1px solid rgba(255,255,255,0.1);
 }
+
 /* TITULOS */
 .title {
     background: linear-gradient(135deg, #1f4e79, #2e75b6);
@@ -43,61 +48,80 @@ header {
     padding: 14px 18px;
     font-weight: bold;
     font-size: 16px;
-    letter-spacing: 0.5px;
     border-bottom: 3px solid #5ba3d9;
 }
+
 /* CONTENIDO */
 .content {
     background: #fffef5;
     padding: 20px 25px;
     border: 1px solid #e0dbb0;
 }
-/* DIAGRAMA */
+
+/* ===== DIAGRAMA MODERNO ===== */
 .flow {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 30px;
-    background: linear-gradient(180deg, #f0f4f8, #e8edf2);
+    gap: 10px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
+
 /* CAJAS */
 .box {
-    width: 340px;
-    padding: 14px 18px;
+    width: 360px;
+    padding: 16px 20px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: bold;
-    font-size: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
+    font-size: 15px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: all 0.25s ease;
 }
+
+/* HOVER */
 .box:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.6);
 }
+
 /* COLORES */
-.blue   { background: #cfe2f3; border-left: 6px solid #2e75b6; }
-.yellow { background: #fff9c4; border-left: 6px solid #f0c300; }
-.orange { background: #ffe0c3; border-left: 6px solid #e07000; }
-.red    { background: #fde8ea; border-left: 6px solid #c40000; }
+.step1 { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+.step2 { background: linear-gradient(135deg, #f7971e, #ffd200); color:#333; }
+.step3 { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
+.step4 { background: linear-gradient(135deg, #00b09b, #96c93d); color:#333; }
+.step5 { background: linear-gradient(135deg, #ff512f, #dd2476); }
+.step6 { background: linear-gradient(135deg, #f953c6, #b91d73); }
+.step7 { background: linear-gradient(135deg, #ff0000, #8b0000); }
+
 /* FLECHAS */
 .arrow {
-    font-size: 22px;
-    color: #888;
-    line-height: 1;
+    font-size: 26px;
+    color: #ffffff;
+    animation: bounce 1.5s infinite;
 }
+
+/* ANIMACIÓN */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
 /* TEXTO */
 ul { text-align: left; padding-left: 20px; }
 li { margin-bottom: 5px; }
+
 h3 {
     color: #1f4e79;
     border-bottom: 2px solid #cfe2f3;
     padding-bottom: 5px;
     margin-top: 20px;
 }
+
 p { line-height: 1.6; color: #333; }
+
 /* NOTAS */
 .note {
     background: #fde8ea;
@@ -106,42 +130,60 @@ p { line-height: 1.6; color: #333; }
     border-left: 5px solid #c40000;
     border-radius: 0 8px 8px 0;
 }
+
 b { color: #c40000; }
+
 </style>
 </head>
+
 <body>
+
 <header>
 🔴 FULLGAS Nómina 🔴
 </header>
+
 <div class="container">
+
 <!-- DIAGRAMA -->
 <div class="section">
 <div class="title">📊 Diagrama de flujo del proceso</div>
+
 <div class="flow">
-<div class="box blue">1. Identificar semana</div>
+
+<div class="box step1">1. Identificar semana</div>
 <div class="arrow">⬇</div>
-<div class="box yellow">2. Copiar datos (Empleado + Estación + Puesto)</div>
+
+<div class="box step2">2. Copiar datos (Empleado + Estación + Puesto)</div>
 <div class="arrow">⬇</div>
-<div class="box blue">Sistema asigna Zona, Salario y Sueldo</div>
+
+<div class="box step3">Sistema asigna Zona, Salario y Sueldo</div>
 <div class="arrow">⬇</div>
-<div class="box yellow">3. Llenar días laborados</div>
+
+<div class="box step4">3. Llenar días laborados</div>
 <div class="arrow">⬇</div>
-<div class="box blue">4. Vacaciones (si aplica)</div>
+
+<div class="box step5">4. Vacaciones (si aplica)</div>
 <div class="arrow">⬇</div>
-<div class="box orange">5. Faltas (descuento automático)</div>
+
+<div class="box step6">5. Faltas (descuento automático)</div>
 <div class="arrow">⬇</div>
-<div class="box red">Observaciones + Autorizaciones</div>
+
+<div class="box step7">Observaciones + Autorizaciones</div>
+
 </div>
 </div>
-<!-- CONTENIDO COMPLETO -->
+
+<!-- CONTENIDO -->
 <div class="section">
 <div class="title">📋 Proceso completo</div>
+
 <div class="content">
+
 <h3>1. Identificar la semana</h3>
 <p>Primero se debe identificar la semana que se tiene que llenar.</p>
 <p>Ejemplo: Si fue la semana 11, sigue la semana 12.</p>
-<p>Ya identificada la semana, se continúa con el siguiente paso.</p>
-<h3>2. Copiar datos del personal, estación y zona</h3>
+
+<h3>2. Copiar datos</h3>
 <ul>
 <li>Apellido paterno</li>
 <li>Apellido materno</li>
@@ -150,53 +192,33 @@ b { color: #c40000; }
 <li>Puesto</li>
 <li>Estación</li>
 </ul>
-<p><b>IMPORTANTE:</b></p>
-<ul>
-<li>Verificar fecha de ingreso</li>
-<li>Verificar datos correctos</li>
-<li>Verificar puesto correcto</li>
-</ul>
-<p>Si no, no se puede enviar la nómina.</p>
-<p>Al poner Amozoc 2 (ejemplo) depende tu estacion → se asigna la zona automáticamente.</p>
-<p>Al ingresar datos → se genera salario y sueldo base.</p>
-<p>Puestos según antigüedad:</p>
-<ul>
-<li>Confianza (Mayor a un año)</li>
-<li>Anfitrión (Mayor a un año)</li>
-<li>Confianza (Menor a un año)</li>
-</ul>
-<p>Zona actual: Puebla 3</p>
-<h3>Repaso</h3>
-<p>Solo copiar desde estación hasta puesto.</p>
-<p><b>Primera vez:</b></p>
-<ul>
-<li>Estación: Amozoc 2</li>
-<li>Nombre: Hugo Joshua Montellano Barajas</li>
-<li>Fecha: 01/04/2024</li>
-<li>Puesto: Confianza</li>
-</ul>
+
+<p><b>IMPORTANTE:</b> Verificar todos los datos antes de enviar.</p>
+
 <h3>3. Días laborados</h3>
 <p>Si no faltó → 6 días</p>
+
 <h3>4. Vacaciones</h3>
 <p>Se ponen 6 o 7 días para salario completo.</p>
+
 <h3>5. Faltas</h3>
-<p>Faltas: 1</p>
-<p>Laborados: 5</p>
+<p>Faltas: 1 | Laborados: 5</p>
+
 <h3>Observaciones</h3>
 <ul>
 <li>Registrar faltas</li>
 <li>Registrar observaciones</li>
 <li>Registrar turnos extras</li>
 </ul>
+
 <div class="note">
-Turnos extras:
-<ul>
-<li>Autorización por WhatsApp</li>
-<li>Llenar formato de turnos</li>
-</ul>
+Turnos extras requieren autorización y formato.
+</div>
+
 </div>
 </div>
+
 </div>
-</div>
+
 </body>
 </html>
